@@ -1,0 +1,35 @@
+.card-body p {
+  margin-bottom: 2px;
+}
+
+.card-body {
+  padding-top: .5rem;
+}
+
+.card-body, .card {
+  border: none;;
+}
+
+.card-header {
+  background-color: transparent;
+  padding: 0;
+}
+
+.card {
+  background-color: transparent;
+}
+
+.ruler {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1rem solid rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  margin-bottom: .3rem;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+}
