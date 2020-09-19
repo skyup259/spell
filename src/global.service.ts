@@ -16,7 +16,7 @@ export class GlobalService {
   selectedLangIndex = 0;
   selectedLang = 'hi-IN';
   userName = 'Bob';
-  allLevelQues = ['like', 'some', 'just', 'which', 'get', 'when', 'who', 'up', 'other', 'do', 'article',
+  allLevelQues = ['book', 'some', 'just', 'which', 'get', 'when', 'who', 'up', 'other', 'do', 'article',
                 'only', 'them', 'know', 'time', 'also', 'people', 'had', 'how', 'been', 'new', 'then', 'than', 'use',
                 'think', 'good', 'now', 'very', 'see', 'please',
                 'well', 'could', 'make', 'first', 'want', 'because', 'most', 'even', 'way', 'much',
@@ -154,6 +154,17 @@ export class GlobalService {
     }
   }
 
+  submit(): void {
+    let correctAns = 0;
+    for (let i = 0; i < this.questionNumber; i++) {
+      if (this.currentLevelQues[i] === this.userInput[i]) {
+        correctAns++;
+      }
+      this.correctPercetage = (correctAns * 100.0 / this.questionNumber);
+    }
+    this.openModel();
+  }
+
   aloudQuestion(): void {
     const word = new SpeechSynthesisUtterance(this.currentLevelQues[this.questionNumber]);
     word.lang = this.selectedLang;
@@ -161,11 +172,14 @@ export class GlobalService {
     window.speechSynthesis.speak(word);
   }
 
+  enterName(): void {
+    this.openNameModel();
+  }
+
   startLevel(): void {
     this.inputRow = true;
     this.userInput = [];
     this.questionNumber = 0;
-    this.openNameModel();
     this.aloudQuestion();
   }
 

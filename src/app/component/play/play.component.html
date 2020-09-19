@@ -6,7 +6,7 @@
   </div>
   <div class="row marginTop">
     <div class="col-12 text-center">
-      <button type="button" class="btn btn-primary btn-lg rounded-circle start-button" (click)="globalService.startLevel()">Start</button>
+      <button type="button" class="btn btn-primary btn-lg rounded-circle start-button" (click)="globalService.enterName()">Start</button>
     </div>
   </div>
 
@@ -20,6 +20,12 @@
       <i class="fa fa-play fa-lg ml-3" style="color: blue;" aria-hidden="true" (click)="globalService.aloudQuestion()"></i>
     </div>
   </div>
+
+  <div class="row" style="margin-top: 4%">
+    <div class="col-12 text-center" *ngIf="globalService.questionNumber > 0">
+      <button type="button" class="btn btn-primary btn" (click)="globalService.submit()">Submit</button>
+    </div>
+  </div>
 </div>
 
 <!-- Modal -->
@@ -27,7 +33,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{{globalService.userName}}: Score {{globalService.correctPercetage}}% </h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{globalService.userName}}: Your Score is {{globalService.correctPercetage}}% </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -40,7 +46,7 @@
               <th scope="col">Your Input</th>
             </tr>
           <tbody class="table-body">
-            <tr *ngFor="let level of ' '.repeat(globalService.numberOfQues).split(''), let x = index"
+            <tr *ngFor="let level of ' '.repeat(globalService.questionNumber).split(''), let x = index"
             [ngClass]="{'table-success': globalService.currentLevelQues[x] === globalService.userInput[x], 'table-danger': globalService.currentLevelQues[x] !== globalService.userInput[x]}">
               <td>{{globalService.currentLevelQues[x]}}</td>
               <td>{{globalService.userInput[x]}}</td>
@@ -61,18 +67,24 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Hear and Spell</h5>
+        <h5 class="modal-title" id="exampleModalLabel"><b>Hear and Spell</b></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="line-height: .75rem; font-size: 14px;">
         <div class="list-group list-group-flush">
-          <a href="#" class="list-group-item disabled">1. Choose Level.(l)</a>
-          <a href="#" class="list-group-item disabled">Each level has 20 words. Make sure Volume is not off</a>
-          <a href="#" class="list-group-item disabled">Click on start button</a>
-          <a href="#" class="list-group-item disabled" >Write on input box</a>
-          <a href="#" class="list-group-item disabled">Press enter or click on done button</a>
+          <a href="#" class="list-group-item disabled">1. Choose Level.(level 1 = easy, level 40 = hard)</a>
+          <a href="#" class="list-group-item disabled">2. Total 20 words in each level.</a>
+          <a href="#" class="list-group-item disabled">3. Press Start Button</a>
+          <a href="#" class="list-group-item disabled">4. Enter Your Name(default name is Bob)</a>
+          <a href="#" class="list-group-item disabled">5. Hear the voice and write your answer in input box</a>
+          <a href="#" class="list-group-item disabled">6. Result will be generated after 20th answer.</a>
+        </div>
+        <div class="mt-4"><b>Note:</b></div>
+        <div class="list-group list-group-flush">
+          <a href="#" class="list-group-item disabled">1. Make sure that device is not on mute</a>
+          <a href="#" class="list-group-item disabled">2. This app works best in following browsers: Google Chrome</a>
         </div>
       </div>
       <div class="modal-footer">
@@ -86,16 +98,16 @@
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Hear and Spell</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Enter Your Name</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body px-4">
-       <input type="text" class="form-control nameForm float-center" placeholder="Name" [(ngModel)]="globalService.userName">
+       <input type="text" class="form-control nameForm float-center" placeholder="Name" [(ngModel)]="globalService.userName" >
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn" data-dismiss="modal">Ok & Hear 1st Word</button>
+        <button type="button" class="btn btn-secondary btn" data-dismiss="modal" (click)="globalService.startLevel()">Ok & Hear 1st Word</button>
       </div>
     </div>
   </div>
