@@ -16,6 +16,8 @@ export class GlobalService {
   selectedLangIndex = 0;
   selectedLang = 'hi-IN';
   userName = 'Bob';
+  showFooter = true;
+  startButtonClicked = false;
   allLevelQues = ['book', 'some', 'just', 'which', 'get', 'when', 'who', 'up', 'other', 'do', 'article',
                 'only', 'them', 'know', 'time', 'also', 'people', 'had', 'how', 'been', 'new', 'then', 'than', 'use',
                 'think', 'good', 'now', 'very', 'see', 'please',
@@ -129,7 +131,10 @@ export class GlobalService {
 
   constructor() { }
 
-  levelChanged(level): void {
+  levelChanged(level, nxtLevel = false): void {
+    if (!nxtLevel) {
+      this.startButtonClicked = false;
+    }
     this.questionNumber = 0;
     this.selectedlevel = level;
     const startingPoint = this.numberOfQues * level;
@@ -173,10 +178,16 @@ export class GlobalService {
   }
 
   enterName(): void {
-    this.openNameModel();
+    if (localStorage.getItem('name')) {
+      this.startLevel();
+    } else {
+      this.openNameModel();
+    }
   }
 
   startLevel(): void {
+    this.startButtonClicked = true;
+    this.showFooter = false;
     localStorage.setItem('name', this.userName);
     this.inputRow = true;
     this.userInput = [];
@@ -193,7 +204,7 @@ export class GlobalService {
   }
 
   nextLevel(): void {
-    this.levelChanged(this.selectedlevel + 1);
+    this.levelChanged(this.selectedlevel + 1, true);
     $('#exampleModal').modal('hide');
     this.aloudQuestion();
   }

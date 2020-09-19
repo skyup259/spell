@@ -6,7 +6,8 @@
   </div>
   <div class="row marginTop">
     <div class="col-12 text-center">
-      <button type="button" class="btn btn-primary btn-lg rounded-circle start-button" (click)="globalService.enterName()">Start</button>
+      <button type="button" class="btn btn-primary btn-lg rounded-circle start-button" (click)="globalService.enterName()"
+      [ngClass]="{'started': globalService.startButtonClicked, 'off': !globalService.startButtonClicked }">Start</button>
     </div>
   </div>
 
@@ -21,9 +22,9 @@
     </div>
   </div>
 
-  <div class="row" style="margin-top: 4%">
-    <div class="col-12 text-center" *ngIf="globalService.questionNumber > 0">
-      <button type="button" class="btn btn-primary btn" (click)="globalService.submit()">Submit</button>
+  <div class="row marginTop">
+    <div class="col-12 text-center" >
+      <button type="button" class="btn btn-primary btn rounded-circle start-button" (click)="globalService.submit()">Submit</button>
     </div>
   </div>
 </div>
