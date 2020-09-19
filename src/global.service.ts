@@ -15,6 +15,7 @@ export class GlobalService {
   correctPercetage: any;
   selectedLangIndex = 0;
   selectedLang = 'hi-IN';
+  userName = 'Bob';
   allLevelQues = ['like', 'some', 'just', 'which', 'get', 'when', 'who', 'up', 'other', 'do', 'article',
                 'only', 'them', 'know', 'time', 'also', 'people', 'had', 'how', 'been', 'new', 'then', 'than', 'use',
                 'think', 'good', 'now', 'very', 'see', 'please',
@@ -164,11 +165,16 @@ export class GlobalService {
     this.inputRow = true;
     this.userInput = [];
     this.questionNumber = 0;
+    this.openNameModel();
     this.aloudQuestion();
   }
 
   openModel(): void {
     $('#exampleModal').modal();
+  }
+
+  openNameModel(): void {
+    $('#enterName').modal();
   }
 
   nextLevel(): void {

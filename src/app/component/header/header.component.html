@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light justify-content-between">
   <div class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <b>Level {{globalService.selectedlevel}}</b>
@@ -49,5 +49,10 @@
         </div>
       </li>
     </ul>
+    <form class="form-inline">
+      <div class="nav-link" href="#" id="Difficulty">
+        <b><i class="fa fa-user-circle-o px-2" aria-hidden="true"></i>Hi {{globalService.userName}}</b>
+      </div>
+    </form>
   </div>
 </nav>

@@ -87,3 +87,7 @@
   float: right;
   border: 2px dashed;
 }
+
+.nameForm {
+  width: 100% !important;
+}
