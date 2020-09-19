@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <b>Level {{globalService.selectedlevel}}</b>
+    </a>
+    <div class="dropdown-menu maxHeight" aria-labelledby="navbarDropdownMenuLink">
+      <a class="dropdown-item" href="#!" (click)="globalService.levelChanged(x)"
+      *ngFor="let level of ' '.repeat(globalService.totalLevel).split(''), let x = index">
+      <b>Level {{x}}</b></a>
+    </div>
+  </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="class" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <b>Class </b>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="class">
+          <a class="dropdown-item disabled" href="#">Class 8</a>
+          <a class="dropdown-item disabled" href="#">Class 9</a>
+          <a class="dropdown-item disabled" href="#">Class 10</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="Difficulty" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <b>Difficulty</b>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="Difficulty">
+          <a class="dropdown-item disabled" href="#">Basic</a>
+          <a class="dropdown-item disabled" href="#">Intermediate</a>
+          <a class="dropdown-item disabled" href="#">Advanced</a>
+          <a class="dropdown-item disabled" href="#">Expert</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="accents" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <b>Accents {{globalService.accents[globalService.selectedLangIndex].show}}</b>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="accents">
+          <a class="dropdown-item" href="#!"  (click)="globalService.changedLang(i)"
+          *ngFor="let lang of globalService.accents, let i=index" [ngClass]="{'aActive': lang.value === globalService.selectedLang}">
+            {{lang.place}}
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

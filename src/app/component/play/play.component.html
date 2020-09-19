@@ -1,0 +1,85 @@
+<div class="justify-content-md-center container-sm">
+  <div class="row">
+    <div class="col-12">
+      <button type="button" class="btn btn-info howToPlay" data-toggle="modal" data-target="#howtoplay">How to Play</button>
+    </div>
+  </div>
+  <div class="row marginTop">
+    <div class="col-12 text-center">
+      <button type="button" class="btn btn-primary btn-lg rounded-circle start-button" (click)="globalService.startLevel()">Start</button>
+    </div>
+  </div>
+
+  <div class="row mt-5" *ngIf="globalService.inputRow">
+    <div class="col-7 pl-5 pr-0 text-right">
+      <input type="text" class="form-control float-right" placeholder="Word {{globalService.questionNumber +1}}/{{globalService.numberOfQues}}" [(ngModel)]="globalService.userWord"
+      (keyup.enter)="globalService.nextQuestion()" (ngModelChange)="globalService.userWord = $event.toLowerCase()">
+    </div>
+    <div class="col-5 pl-1 text-left">
+      <button type="button" class="btn btn-primary" (click)="globalService.nextQuestion()" [disabled]="!globalService.userWord">Done</button>
+      <i class="fa fa-play fa-lg ml-3" style="color: blue;" aria-hidden="true" (click)="globalService.aloudQuestion()"></i>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Score {{globalService.correctPercetage}}% </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-sm">
+          <thead class="table-head">
+            <tr>
+              <th scope="col">Actual</th>
+              <th scope="col">Your Input</th>
+            </tr>
+          <tbody class="table-body">
+            <tr *ngFor="let level of ' '.repeat(globalService.numberOfQues).split(''), let x = index"
+            [ngClass]="{'table-success': globalService.currentLevelQues[x] === globalService.userInput[x], 'table-danger': globalService.currentLevelQues[x] !== globalService.userInput[x]}">
+              <td>{{globalService.currentLevelQues[x]}}</td>
+              <td>{{globalService.userInput[x]}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="globalService.nextLevel()">Next Level</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--How to Play-->
+<div class="modal fade" id="howtoplay" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Hear and Spell</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="list-group list-group-flush">
+          <a href="#" class="list-group-item disabled">Select level from menu dropdown</a>
+          <a href="#" class="list-group-item disabled">Each level has 20 words. Make sure Volume is not off</a>
+          <a href="#" class="list-group-item disabled">Click on start button</a>
+          <a href="#" class="list-group-item disabled" >Write on input box</a>
+          <a href="#" class="list-group-item disabled">Press enter or click on done button</a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

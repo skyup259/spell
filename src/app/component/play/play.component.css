@@ -1,0 +1,89 @@
+@media (max-width: 360px) {
+  .form-control {
+    width: 90%!important;
+  }
+
+  .marginTop {
+    margin-top: 25%;
+  }
+}
+
+@media (min-width: 360px) and (max-width: 500px) {
+  .form-control {
+    width: 90%!important;
+  }
+
+  .marginTop {
+    margin-top: 30%;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 800px) {
+  .form-control {
+    width: 60%!important;
+  }
+
+  .marginTop {
+    margin-top: 12%;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 1300px) {
+  .form-control {
+    width: 60%!important;
+  }
+
+  .marginTop {
+    margin-top: 15%;
+  }
+}
+
+@media (min-width: 1300px){
+  .form-control {
+    width: 40%!important;
+  }
+
+  .marginTop {
+    margin-top: 15%;
+  }
+}
+
+.start-button {
+  height: 71px;
+  border: 1px dashed;
+}
+
+.modal-header {
+  padding: .3rem 2rem;
+}
+
+.modal-body {
+  padding-left: .5rem;
+  padding-right: .5rem;
+  padding-top: .4rem;
+  padding-bottom: .4rem;
+}
+
+.table {
+  margin-bottom: 0rem;
+}
+
+.modal-footer {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: .1rem;
+  padding-bottom: .1rem;
+}
+
+.table-head {
+  line-height: 1.2rem;
+}
+
+.table-body {
+  line-height: 1rem;
+}
+
+.howToPlay {
+  float: right;
+  border: 2px dashed;
+}
