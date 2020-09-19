@@ -13,5 +13,8 @@ export class PlayComponent implements OnInit {
 
   ngOnInit(): void {
     this.globalService.levelChanged(0);
+    if (localStorage.getItem('name')) {
+      this.globalService.userName = localStorage.getItem('name');
+    }
   }
 }

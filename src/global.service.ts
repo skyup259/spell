@@ -177,6 +177,7 @@ export class GlobalService {
   }
 
   startLevel(): void {
+    localStorage.setItem('name', this.userName);
     this.inputRow = true;
     this.userInput = [];
     this.questionNumber = 0;
@@ -194,6 +195,7 @@ export class GlobalService {
   nextLevel(): void {
     this.levelChanged(this.selectedlevel + 1);
     $('#exampleModal').modal('hide');
+    this.aloudQuestion();
   }
 
   changedLang(idx): void {
