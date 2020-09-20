@@ -128,6 +128,11 @@ export class GlobalService {
       }
     ];
 
+    dashboardArr = [];
+    isDashboard = false;
+    timeTakenToSolve: any;
+    startTime: any;
+
 
   constructor() { }
 
@@ -146,13 +151,15 @@ export class GlobalService {
     this.userWord = '';
     if (this.questionNumber === this.numberOfQues - 1) {
       let correctAns = 0;
+      this.timeTakenToSolve = ((((new Date()).valueOf() - this.startTime) / 1000) / 60).toFixed(2);
       for (let i = 0; i < this.numberOfQues; i++) {
         if (this.currentLevelQues[i] === this.userInput[i]) {
           correctAns++;
         }
-        this.correctPercetage = (correctAns * 100.0 / this.numberOfQues);
+        this.correctPercetage = (correctAns * 100.0 / this.numberOfQues).toFixed(2);
       }
       this.openModel();
+      this.addLevelToLocalStorage();
     } else {
       this.questionNumber = this.questionNumber + 1;
       this.aloudQuestion();
@@ -161,13 +168,67 @@ export class GlobalService {
 
   submit(): void {
     let correctAns = 0;
+    this.timeTakenToSolve = ((((new Date()).valueOf() - this.startTime) / 1000) / 60).toFixed(2);
     for (let i = 0; i < this.questionNumber; i++) {
       if (this.currentLevelQues[i] === this.userInput[i]) {
         correctAns++;
       }
-      this.correctPercetage = (correctAns * 100.0 / this.questionNumber);
+      this.correctPercetage = (correctAns * 100.0 / this.questionNumber).toFixed(2);
     }
+    this.addLevelToLocalStorage();
     this.openModel();
+  }
+
+  addLevelToLocalStorage(): void {
+    this.isDashboard = true;
+    const currentDate = new Date();
+    let status: string;
+    if (this.correctPercetage <= 39 ) {
+      status = 'Below min';
+    } else if (this.correctPercetage >= 90) {
+      status = 'Outstanding';
+    } else if (this.correctPercetage >= 80) {
+      status = 'Excellent';
+    } else if (this.correctPercetage >= 70) {
+      status = 'Very good';
+    } else if (this.correctPercetage >= 60) {
+      status = 'Good';
+    } else if (this.correctPercetage >= 50) {
+      status = 'Average';
+    } else {
+      status = 'Poor';
+    }
+    if ( this.questionNumber === 19) {
+      this.questionNumber++;
+    }
+    const levelData = {
+      level: this.selectedlevel,
+      score: this.correctPercetage,
+      timeTaken: this.timeTakenToSolve,
+      attempt: 1,
+      status: status,
+      date : currentDate,
+      numberOfQuest: this.questionNumber
+    };
+    if (localStorage.getItem('level')) {
+      let isPresent = false;
+      const arr = JSON.parse(localStorage.getItem('level'));
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].level === this.selectedlevel) {
+          levelData.attempt = levelData.attempt + 1;
+          arr[i] = levelData;
+          isPresent = true;
+        }
+      }
+      if (!isPresent) {
+        arr.push(levelData);
+      }
+      localStorage.setItem('level', JSON.stringify(arr));
+    } else {
+      const arr = [];
+      arr.push(levelData);
+      localStorage.setItem('level', JSON.stringify(arr));
+    }
   }
 
   aloudQuestion(): void {
@@ -178,6 +239,9 @@ export class GlobalService {
   }
 
   enterName(): void {
+    if (this.userName === 'Bob') {
+      this.userName = '';
+    }
     if (localStorage.getItem('name')) {
       this.startLevel();
     } else {
@@ -186,6 +250,7 @@ export class GlobalService {
   }
 
   startLevel(): void {
+    this.startTime = (new Date()).valueOf();
     this.startButtonClicked = true;
     this.showFooter = false;
     localStorage.setItem('name', this.userName);
@@ -205,7 +270,9 @@ export class GlobalService {
 
   nextLevel(): void {
     this.levelChanged(this.selectedlevel + 1, true);
+    this.userInput = [];
     $('#exampleModal').modal('hide');
+    this.startTime = (new Date()).valueOf();
     this.aloudQuestion();
   }
 

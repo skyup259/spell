@@ -4,6 +4,13 @@
       <button type="button" class="btn btn-info howToPlay" data-toggle="modal" data-target="#howtoplay">How to Play</button>
     </div>
   </div>
+  <div class="row" *ngIf="globalService.isDashboard">
+    <div class="col">
+      <button type="button" class="btn btn-info howToPlay mt-2" data-toggle="modal" data-target="#dashboard" (click)="dashboard()">
+        Dashboard
+      </button>
+    </div>
+  </div>
   <div class="row marginTop">
     <div class="col-12 text-center">
       <button type="button" class="btn btn-primary btn-lg rounded-circle start-button" (click)="globalService.enterName()"
@@ -22,7 +29,7 @@
     </div>
   </div>
 
-  <div class="row marginTop">
+  <div class="row marginTop" *ngIf="globalService.questionNumber > 0">
     <div class="col-12 text-center" >
       <button type="button" class="btn btn-primary btn rounded-circle start-button" (click)="globalService.submit()">Submit</button>
     </div>
@@ -95,6 +102,54 @@
   </div>
 </div>
 
+<!--dashboard-->
+<div class="modal fade" id="dashboard" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><b>Progress Report</b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="line-height: .75rem; font-size: 14px;">
+        <table class="table table-bordered table-sm">
+          <thead class="table-head">
+            <tr>
+              <th scope="col">Level</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Score</th>
+              <th scope="col">Attempt</th>
+              <th scope="col">Status</th>
+              <th scope="col">Questions</th>
+            </tr>
+          <tbody class="table-body">
+            <tr *ngFor="let data of globalService.dashboardArr, let x = index"
+            [ngClass]="{'table-success': data.status === 'Outstanding',
+                        'table-danger': data.status === 'Below min',
+                        'table-primary': data.status === 'Excellent',
+                        'table-info': data.status === 'Very good',
+                        'table-Warning': data.status === 'Good',
+                        'table-Secondary': data.status === 'Average'}">
+              <td>{{data.level}}</td>
+              <td>{{data.timeTaken}}min</td>
+              <td>{{data.score}}%</td>
+              <td>{{data.attempt}}</td>
+              <td>{{data.status}}</td>
+              <td>{{data.numberOfQuest}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Name details-->
 <div class="modal fade" id="enterName" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">

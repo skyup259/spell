@@ -16,5 +16,16 @@ export class PlayComponent implements OnInit {
     if (localStorage.getItem('name')) {
       this.globalService.userName = localStorage.getItem('name');
     }
+    if (localStorage.getItem('level')) {
+      this.globalService.dashboardArr = JSON.parse(localStorage.getItem('level'));
+      this.globalService.isDashboard = true;
+    }
+  }
+
+  dashboard(): void {
+    if (localStorage.getItem('level')) {
+      this.globalService.dashboardArr = JSON.parse(localStorage.getItem('level'));
+      this.globalService.isDashboard = true;
+    }
   }
 }

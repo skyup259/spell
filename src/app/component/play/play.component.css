@@ -99,3 +99,19 @@
 .off {
   background-color: #007bff;
 }
+
+.table-Secondary {
+  background-color: #d6d8db;
+}
+
+.table-Warning {
+  background-color: #ffeeba;
+}
+
+.table-Info {
+  background-color: #bee5eb;
+}
+
+.table-Primary {
+  background-color: #b8daff;
+}
